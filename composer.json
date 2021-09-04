@@ -1,0 +1,41 @@
+{
+    "name": "amirsarfar/dyna-base",
+    "description": ":package_description",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Author Name",
+            "email": "author@email.com",
+            "homepage": "http://author.com"
+        }
+    ],
+    "homepage": "https://github.com/amirsarfar/dyna-base",
+    "keywords": ["Laravel", "DynaBase"],
+    "require": {
+        "illuminate/support": "~7|~8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~9.0",
+        "orchestra/testbench": "~5|~6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Amirsarfar\\DynaBase\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Amirsarfar\\DynaBase\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Amirsarfar\\DynaBase\\DynaBaseServiceProvider"
+            ],
+            "aliases": {
+                "DynaBase": "Amirsarfar\\DynaBase\\Facades\\DynaBase"
+            }
+        }
+    }
+}
