@@ -2,6 +2,8 @@
 
 namespace Amirsarfar\DynaBase;
 
+use Illuminate\Support\Env;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Web64\Colors\Facades\Colors;
@@ -19,13 +21,7 @@ class DynaBaseServiceProvider extends ServiceProvider
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'amirsarfar');
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'amirsarfar');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        if(Schema::hasTable('types')){
-            $this->loadRoutesFrom(__DIR__.'/../routes/dyna.php');
-
-        }else{
-            if(env('APP_ENV') != 'testing')
-                Colors::error("ERROR: Please run migrations! types table not found!");
-        }
+        $this->loadDynamicRoutesFromDatabase();
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
@@ -87,5 +83,30 @@ class DynaBaseServiceProvider extends ServiceProvider
 
         // Registering package commands.
         // $this->commands([]);
+    }
+
+    public function loadDynamicRoutesFromDatabase()
+    {
+        try {
+            DB::connection()->getPdo();
+        } catch (\Exception $e) {
+            $db_name = DB::connection()->getConfig('database');
+            $db_host = DB::connection()->getConfig('host');
+            $db_port = DB::connection()->getConfig('port');
+            if(Env::get('APP_ENV') != 'testing'){
+                Colors::error("DYNA ERROR: Dynamic routes are not loaded!");
+                Colors::error("DYNA ERROR: Could not connect to the database ($db_name at $db_host:$db_port)!  Please check your configuration!" );
+            }
+            return;
+        }
+        
+        if(Schema::hasTable('types')){
+            $this->loadRoutesFrom(__DIR__.'/../routes/dyna.php');
+        }else{
+            if(Env::get('APP_ENV') != 'testing'){
+                Colors::error("DYNA ERROR: Dynamic routes are not loaded!");
+                Colors::error("DYNA ERROR: Types table not found! Please run migrations! ");
+            }
+        }
     }
 }
