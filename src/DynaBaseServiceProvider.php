@@ -2,8 +2,11 @@
 
 namespace Amirsarfar\DynaBase;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Web64\Colors\Facades\Colors;
 
+// use Web64\Colors\Facades\Colors;
 class DynaBaseServiceProvider extends ServiceProvider
 {
     /**
@@ -15,8 +18,14 @@ class DynaBaseServiceProvider extends ServiceProvider
     {
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'amirsarfar');
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'amirsarfar');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadRoutesFrom(__DIR__.'/../routes/dyna.php');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        if(Schema::hasTable('types')){
+            $this->loadRoutesFrom(__DIR__.'/../routes/dyna.php');
+
+        }else{
+            if(env('APP_ENV') != 'testing')
+                Colors::error("ERROR: Please run migrations! types table not found!");
+        }
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {

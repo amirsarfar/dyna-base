@@ -39,7 +39,7 @@ use Illuminate\Http\Request;
 //! CLEANUP
 
 
-Route::prefix('dyna/api/v1')->group(function () {
+Route::prefix('dyna/api/v1')->middleware('api')->group(function () {
     Route::apiResource('types', TypeController::class);
     $types = Type::all();
     foreach ($types as $type) {
