@@ -105,7 +105,7 @@ class PostRelatedController extends Controller
             if($action == 'sync' && $related_attribute->options->count == 'one' && count($ids) > 1)
                 return response(['error' => 'More than 1 related id for relation with count \'one\'.'], Response::HTTP_BAD_REQUEST);
             
-            $post->$dyna_relation_method($ids, $related_name, $request->get('reference_key'));
+            $post->$dyna_relation_method($ids, $request->get('reference_key'), $related_name);
             return response([$related_name => $ids]);
         }
         return response(['error' => 'Resources not found'], Response::HTTP_BAD_REQUEST);

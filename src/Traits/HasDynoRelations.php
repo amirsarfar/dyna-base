@@ -21,7 +21,7 @@ trait HasDynoRelations
         return $this->parents()->detach($removable_id);
     }
 
-    public function addChild($addable, $parent_key, $child_key)
+    public function addChild($addable, $child_key, $parent_key)
     {
         if ($addable === null) return;
         $addable_id = $addable instanceof Post ? $addable->id : $addable;
@@ -37,7 +37,7 @@ trait HasDynoRelations
 
     /* -------------------------------- */
 
-    public function removeChildren($removables, $parent_key, $child_key): int
+    public function removeChildren($removables, $child_key, $parent_key): int
     {
         $removable_ids = $removables instanceof Collection ? $removables->pluck('id')->all() : $removables;
         $removable_ids = array_intersect($removable_ids, $this->children()->wherePivot('parent_key', $parent_key)->wherePivot('child_key', $child_key)->get()->pluck('id')->all());
@@ -52,7 +52,7 @@ trait HasDynoRelations
 
     }
 
-    public function addChildren($addables, $parent_key, $child_key)
+    public function addChildren($addables, $child_key, $parent_key)
     {
         $addable_ids = $addables instanceof Collection ? $addables->pluck('id')->all() : $addables;
         $addable_ids = array_diff($addable_ids, $this->children()->wherePivot('parent_key', $parent_key)->wherePivot('child_key', $child_key)->get()->pluck('id')->all());
@@ -68,7 +68,7 @@ trait HasDynoRelations
 
     /* -------------------------------- */
 
-    public function syncChildren($syncables, $parent_key, $child_key): array
+    public function syncChildren($syncables, $child_key, $parent_key): array
     {
         $syncable_ids = $syncables instanceof Collection ? $syncables->pluck('id')->all() : $syncables;
         return $this->children()->syncWithPivotValues($syncable_ids, compact('parent_key', 'child_key'));
