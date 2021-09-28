@@ -27,7 +27,6 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        // return response($request->input('definition'));
         if(Type::where(['key' => $request->input('key')])->first()){
             return response(
                 [
@@ -36,6 +35,7 @@ class TypeController extends Controller
                 Response::HTTP_CONFLICT
             );
         }
+        
         $type = Type::create([
             'key' => $request->input('key'),
             'title' => $request->input('title'),
