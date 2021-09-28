@@ -7,7 +7,10 @@
 
 ## About Dyna
 
-Dyna is a laravel based CMS. The idea behind Dyna is developing backend of websites using api only.
+The idea behind Dyna is to offer dynamic-API-creation APIs. This means that you can build APIs from your front-end application by sending requests to certain APIs. 
+
+You just need to install this package in your Laravel application and run its migrations !
+ 
 
 ## Database Schema
 <p align="center">
@@ -196,3 +199,11 @@ and the run migrations:
 ```bash
 php artisan migrate
 ```
+
+
+## TODO
+- Add options to text attributes
+- Add more attribute types (number, file, ...)
+- Add more validations for requests
+- Add authorization for operations
+- Add external relations routes
