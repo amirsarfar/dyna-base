@@ -181,10 +181,9 @@ Blog post external relations operations:
 Not implemented yet !
 
 
-And same goes for blog post comment type.
+And the same goes for blog post comment type.
 
-
-<br><br><br>
+<br>
 
 ## Installation
 
@@ -193,16 +192,7 @@ Simply run:
 composer require amirsarfar/dyna-base
 ```
 
-## Usage
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in
-becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-## Contributing
-
-Thank you for considering contributing to the Dyna CMS! The contribution guide can be found in
-the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## License
-
-The Dyna CMS is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+and the run migrations:
+```bash
+php artisan migrate
+```
