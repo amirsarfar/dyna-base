@@ -1,16 +1,16 @@
 {
     "name": "amirsarfar/dyna-base",
-    "description": ":package_description",
+    "description": "A headless CMS designed to create dynamically defined data models and API endpoints",
     "license": "MIT",
     "authors": [
         {
-            "name": "Author Name",
-            "email": "author@email.com",
-            "homepage": "http://author.com"
+            "name": "Amir Sarfar",
+            "email": "amirsarfar@gmail.com",
+            "homepage": "http://amirsarfarazi.ir"
         }
     ],
     "homepage": "https://github.com/amirsarfar/dyna-base",
-    "keywords": ["Laravel", "DynaBase"],
+    "keywords": ["Laravel", "DynaBase", "dyna", "headless CMS"],
     "require": {
         "illuminate/support": "~7|~8",
         "web64/laravel-cli-colors": "^0.20.0"
